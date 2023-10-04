@@ -1,0 +1,18 @@
+.MakePost{
+    text-align:left;
+    margin-left: 20px;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.PostContainer
+{
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    width: 200px;
+}

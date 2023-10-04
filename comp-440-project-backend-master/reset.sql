@@ -1,0 +1,15 @@
+DROP DATABASE IF EXISTS `comp440`;
+CREATE DATABASE `comp440`;
+USE `comp440`;
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (`username` varchar(20) NOT NULL,`password` varchar(45) NOT NULL,`firstName` varchar(45) NOT NULL,`lastName` varchar(45) NOT NULL,`email` varchar(100) NOT NULL UNIQUE, `hobby` varchar (20), PRIMARY KEY (`username`));
+DROP TABLE IF EXISTS `blogs`;
+CREATE TABLE `blogs` (`blogid` INT NOT NULL AUTO_INCREMENT,`author` varchar(20) NOT NULL,`subject` TEXT NOT NULL,`description` TEXT NOT NULL,`tags` TEXT NOT NULL,`creationDate` DATE DEFAULT (CURRENT_DATE), PRIMARY KEY (`blogid`), FOREIGN KEY (author) REFERENCES users(username));
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments` (`commentid` INT NOT NULL AUTO_INCREMENT, `author` varchar(20) NOT NULL, `blogid` INT NOT NULL, `sentiment` varchar(20) NOT NULL,`description` TEXT NOT NULL,`creationDate` DATE DEFAULT (CURRENT_DATE), PRIMARY KEY (`commentid`), FOREIGN KEY (author) REFERENCES users(username), FOREIGN KEY (blogid) REFERENCES blogs(blogid));
+DROP TABLE IF EXISTS `follows`;
+CREATE TABLE `follows` (`follower` varchar(20) NOT NULL, `followee` varchar(20) NOT NULL, PRIMARY KEY (follower, followee), FOREIGN KEY (follower) REFERENCES users(username), FOREIGN KEY (followee) REFERENCES users(username));
+DROP TABLE IF EXISTS `tags`;
+CREATE TABLE `tags` (`tag` varchar(20) NOT NULL, `blogid` INT NOT NULL, PRIMARY KEY (tag, blogid), FOREIGN KEY (blogid) REFERENCES blogs(blogid));
+DROP TABLE IF EXISTS `rand`;
+CREATE TABLE `rand` (`random` varchar(20) NOT NULL);
